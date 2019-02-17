@@ -81,7 +81,7 @@ func newRequest(request *http.Request, conn net.Conn, startTime time.Time) *Requ
 	return fReq
 }
 
-// Returns a completed falcore.Request and response after running the single filter stage
+// TestWithRequest returns a completed falcore.Request and response after running the single filter stage
 // The PipelineStageStats is completed in the returned Request
 // The falcore.Request.Connection and falcore.Request.RemoteAddr are nil
 func TestWithRequest(request *http.Request, filter RequestFilter, context map[string]interface{}) (*Request, *http.Response) {
@@ -124,7 +124,7 @@ func (fReq *Request) finishCommon() {
 	fReq.piplineTot += fReq.CurrentStage.EndTime.Sub(fReq.CurrentStage.StartTime)
 }
 
-// The Signature will only be complete in the RequestDoneCallback.  At
+// Signature will only be complete in the RequestDoneCallback.  At
 // any given time, the Signature is a crc32 sum of all the finished
 // pipeline stages combining PipelineStageStat.Name and PipelineStageStat.Status.
 // This gives a unique signature for each unique path through the pipeline.
@@ -134,7 +134,7 @@ func (fReq *Request) Signature() string {
 	return fmt.Sprintf("%X", fReq.pipelineHash.Sum32())
 }
 
-// Call from RequestDoneCallback.  Logs a bunch of information about the
+// Trace: Call from RequestDoneCallback.  Logs a bunch of information about the
 // request to the falcore logger. This is a pretty big hit to performance
 // so it should only be used for debugging or development.  The source is a
 // good example of how to get useful information out of the Request.

@@ -13,7 +13,7 @@ import (
 	"syscall"
 )
 
-// very simple request filter
+// Filter: very simple request filter
 func Filter(request *falcore.Request) *http.Response {
 	return falcore.SimpleResponse(request.HttpRequest, 200, nil, "OK\n")
 }

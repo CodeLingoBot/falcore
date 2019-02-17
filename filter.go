@@ -11,7 +11,7 @@ type RequestFilter interface {
 	FilterRequest(req *Request) *http.Response
 }
 
-// Helper to create a Filter by just passing in a func
+// NewRequestFilter: Helper to create a Filter by just passing in a func
 //    filter = NewRequestFilter(func(req *Request) *http.Response {
 //			req.Headers.Add("X-Falcore", "is_cool")
 //			return
@@ -37,7 +37,7 @@ type ResponseFilter interface {
 	FilterResponse(req *Request, res *http.Response)
 }
 
-// Helper to create a Filter by just passing in a func
+// NewResponseFilter: Helper to create a Filter by just passing in a func
 //    filter = NewResponseFilter(func(req *Request, res *http.Response) {
 //			// some crazy response magic
 //			return

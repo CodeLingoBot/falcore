@@ -17,7 +17,7 @@ type Route interface {
 	MatchString(str string) RequestFilter
 }
 
-// Generate a new Router instance using f for SelectPipeline
+// NewRouter: Generate a new Router instance using f for SelectPipeline
 func NewRouter(f genericRouter) Router {
 	return f
 }
@@ -55,7 +55,7 @@ type HostRouter struct {
 	hosts map[string]RequestFilter
 }
 
-// Generate a new HostRouter instance
+// NewHostRouter: Generate a new HostRouter instance
 func NewHostRouter() *HostRouter {
 	r := new(HostRouter)
 	r.hosts = make(map[string]RequestFilter)
@@ -76,7 +76,7 @@ type PathRouter struct {
 	Routes *list.List
 }
 
-// Generate a new instance of PathRouter
+// NewPathRouter: Generate a new instance of PathRouter
 func NewPathRouter() *PathRouter {
 	r := new(PathRouter)
 	r.Routes = list.New()
@@ -87,7 +87,7 @@ func (r *PathRouter) AddRoute(route Route) {
 	r.Routes.PushBack(route)
 }
 
-// convenience method for adding RegexpRoutes
+// AddMatch: convenience method for adding RegexpRoutes
 func (r *PathRouter) AddMatch(match string, filter RequestFilter) (err error) {
 	route := &RegexpRoute{Filter: filter}
 	if route.Match, err = regexp.Compile(match); err == nil {
@@ -96,7 +96,7 @@ func (r *PathRouter) AddMatch(match string, filter RequestFilter) (err error) {
 	return
 }
 
-// Will panic if r.Routes contains an object that isn't a Route
+// SelectPipeline Will panic if r.Routes contains an object that isn't a Route
 func (r *PathRouter) SelectPipeline(req *Request) (pipe RequestFilter) {
 	var route Route
 	for r := r.Routes.Front(); r != nil; r = r.Next() {

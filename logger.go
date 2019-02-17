@@ -26,12 +26,12 @@ func SetLogger(newLogger Logger) {
 	logger = newLogger
 }
 
-// Helper for calculating times
+// TimeDiff: Helper for calculating times
 func TimeDiff(startTime time.Time, endTime time.Time) float32 {
 	return float32(endTime.Sub(startTime)) / 1.0e9
 }
 
-// Global Logging
+// Finest: Global Logging
 func Finest(arg0 interface{}, args ...interface{}) {
 	logger.Finest(arg0, args...)
 }

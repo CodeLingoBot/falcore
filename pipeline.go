@@ -34,7 +34,7 @@ func NewPipeline() (l *Pipeline) {
 	return
 }
 
-// Pipelines are also RequestFilters... wacky eh?
+// FilterRequest: Pipelines are also RequestFilters... wacky eh?
 // Be careful though because a Pipeline will always returns a
 // response so no Filters after a Pipeline filter will be run.
 func (p *Pipeline) FilterRequest(req *Request) *http.Response {

@@ -62,7 +62,7 @@ func (sbf *StringBodyFilter) readRequestBody(r *http.Request) (sb *StringBody, e
 	return nil, nil // ignore
 }
 
-// Returns a buffer used in the FilterRequest stage to a buffer pool
+// ReturnBuffer returns a buffer used in the FilterRequest stage to a buffer pool
 // this speeds up this filter significantly by reusing buffers
 func (sbf *StringBodyFilter) ReturnBuffer(request *Request) {
 	if sb, ok := request.HttpRequest.Body.(*StringBody); ok {
@@ -70,7 +70,7 @@ func (sbf *StringBodyFilter) ReturnBuffer(request *Request) {
 	}
 }
 
-// Insert this in the response pipeline to return the buffer pool for the request body
+// FilterResponse: Insert this in the response pipeline to return the buffer pool for the request body
 // If there is an appropriate place in your flow, you can call ReturnBuffer explicitly
 func (sbf *StringBodyFilter) FilterResponse(request *Request, res *http.Response) {
 	sbf.ReturnBuffer(request)

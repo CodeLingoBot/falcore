@@ -91,7 +91,7 @@ func NewUpstream(host string, port int, forceHttp bool) *Upstream {
 	return u
 }
 
-// Alter the number of connections to multiplex with
+// SetPoolSize: Alter the number of connections to multiplex with
 func (u *Upstream) SetPoolSize(size int) {
 	u.transport.MaxIdleConnsPerHost = size
 }

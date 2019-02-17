@@ -34,7 +34,7 @@ type UpstreamPool struct {
 	pinger       *time.Ticker
 }
 
-// The config consists of a map of the servers in the pool in the format host_or_ip:port 
+// NewUpstreamPool: The config consists of a map of the servers in the pool in the format host_or_ip:port
 // where port is optional and defaults to 80.  The map value is an int with the weight
 // only 0 and 1 are supported weights (0 disables a server and 1 enables it)
 func NewUpstreamPool(name string, config []UpstreamEntryConfig) *UpstreamPool {
@@ -108,7 +108,7 @@ func (up UpstreamPool) updateUpstream(ue *UpstreamEntry, wgt int) {
 	up.weightMutex.Unlock()
 }
 
-// This should only be called if the upstream pool is no longer active or this may deadlock
+// Shutdown: This should only be called if the upstream pool is no longer active or this may deadlock
 func (up UpstreamPool) Shutdown() {
 	// ping and nextServer
 	close(up.shutdown)

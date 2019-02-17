@@ -22,7 +22,7 @@ type bufferPoolEntry struct {
 	source io.Reader
 }
 
-// make bufferPoolEntry a passthrough io.Reader
+// Read: make bufferPoolEntry a passthrough io.Reader
 func (bpe *bufferPoolEntry) Read(p []byte) (n int, err error) {
 	return bpe.source.Read(p)
 }
